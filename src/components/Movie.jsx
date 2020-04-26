@@ -3,33 +3,22 @@ import { data as movies } from "../movie.json";
 
 const baseStyle = {
   cursor: "pointer",
-  //border: "solid 2px red",
 };
 
 export default function Movie() {
-  const [select, setSelect] = useState(false);
-  const [style, setStyle] = useState(baseStyle);
+  const [select, setSelect] = useState({});
 
-  useEffect(() => {
-    // เอาไว้ทำการเดียวหลัง reload
-    console.log("mounted"); // mounted
-  }, []);
-
-  useEffect(() => {
-    console.log("updated", select);
-
-    setStyle({
+  function style(id) {
+    return {
       ...baseStyle,
-      border: select ? "solid 2px red" : "",
-    });
-  }, [select]); // state ที่เป็น select ทำการ update
+      border: select[id] ? "solid 2px black" : "",
+    };
+  }
 
-  useEffect(() => {
-    console.log("anything update"); // state ทุกตัวทำการ update หมด
-  });
-
-  function handleClick() {
-    setSelect(!select);
+  function handleClick(id) {
+    console.log([id]);
+    setSelect({ ...select, [id]: !select[id] });
+    // {1: true, 2: true}
   }
 
   return (
@@ -38,8 +27,8 @@ export default function Movie() {
       {movies.map((each) => (
         <img
           key={each.id}
-          onClick={handleClick}
-          style={style}
+          onClick={() => handleClick(each.id)}
+          style={style(each.id)}
           src={"http://localhost:3000/images/" + each.id + ".jpg"}
         />
       ))}
