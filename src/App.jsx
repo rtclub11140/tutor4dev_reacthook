@@ -1,13 +1,29 @@
 import React from "react";
-import Form from "./components/Form";
+import Form from "./components/Input";
+import useFormInput from "./use-form-input";
 
 export default function App() {
+  const [name, handleNameChange] = useFormInput("John");
+  const [surname, handleSurnameChange] = useFormInput("Doe");
+
   return (
     <div>
-      <Form />
+      <input onChange={handleNameChange} value={name} type="text" />
+      <p>{name}</p>
+      <hr />
+      <input onChange={handleSurnameChange} value={surname} type="text" />
+      <p>{surname}</p>
     </div>
   );
 }
+
+// export default function App() {
+//   return (
+//     <div>
+//       <Form />
+//     </div>
+//   );
+// }
 
 // export default function App() {
 //   const [counter, setCounter] = useState(1);
