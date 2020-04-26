@@ -8,7 +8,7 @@ const baseStyle = {
 
 export default function Movie() {
   const [select, setSelect] = useState(false);
-  // const [style, setStyle] = useState[baseStyle];
+  const [style, setStyle] = useState(baseStyle);
 
   useEffect(() => {
     // เอาไว้ทำการเดียวหลัง reload
@@ -17,6 +17,11 @@ export default function Movie() {
 
   useEffect(() => {
     console.log("updated", select);
+
+    setStyle({
+      ...baseStyle,
+      border: select ? "solid 2px red" : "",
+    });
   }, [select]); // state ที่เป็น select ทำการ update
 
   useEffect(() => {
@@ -34,6 +39,7 @@ export default function Movie() {
         <img
           key={each.id}
           onClick={handleClick}
+          style={style}
           src={"http://localhost:3000/images/" + each.id + ".jpg"}
         />
       ))}
