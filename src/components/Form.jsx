@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import Input from "./Input.jsx";
 
 export default function () {
-  const [name, setName] = useState("John");
-
-  function handleChange(e) {
-    console.log("e : ", e.target.value);
-    setName(e.target.value);
-  }
   return (
     <div>
       <h1>Form</h1>
-      <input onChange={handleChange} value={name} type="text" />
+      <Input name="name" />
+      <Input name="surname" />
+      {/* <input onChange={handleChangeName} value={name} type="text" />
+      <input onChange={handleChangeSurName} value={surName} type="text" />
       <p>{name}</p>
+      <p>{surName}</p> */}
     </div>
   );
 }
